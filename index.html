@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Nadine ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;700&family=Playfair+Display:ital,wght=1,600&display=swap');
+
+*{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+    position: relative;
+}
+
+.confetti { position: absolute; width: 10px; height: 10px; background-color: #f1c40f; border-radius: 50%; opacity: 0.6; animation: fall linear infinite; }
+@keyframes fall { to { transform: translateY(100vh); } }
+
+.intro-container { text-align: center; z-index: 10; }
+
+.start-btn {
+    padding: 18px 45px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 117, 140, 0.4);
+    transition: transform 0.3s ease;
+}
+.start-btn:hover { transform: scale(1.05); }
+
+.countdown { font-size: 6rem; font-weight: 700; color: #f1c40f; display: none; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+
+.card{
+    position: relative;
+    width:92%;
+    max-width:700px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 40px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    display: none;
+    max-height: 85vh;
+    overflow-y: auto;
+    z-index: 5;
+    animation: showCard 2s forwards;
+}
+
+@keyframes showCard{ from{ opacity:0; transform: translateY(50px); } to{ opacity:1; transform: translateY(0); } }
+
+h1{ font-size: 3rem; margin-bottom: 10px; color: #f1c40f; }
+.birthday-photo { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 4px solid #f1c40f; margin-bottom: 20px; }
+.message-box p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
+.signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.6rem; color: #f1c40f; display: block; }
+</style>
+</head>
+<body>
+
+<audio id="mainSong" preload="auto">
+    <source src="SaveTik.io_7383702902587657478.mp3" type="audio/mpeg">
+</audio>
+
+<div class="intro-container" id="introBox">
+    <button class="start-btn" id="startBtn">Open Your Gift 🎁</button>
+    <div class="countdown" id="chrono">00:10</div>
+</div>
+
+<div class="card" id="birthdayCard">
+    <video id="memoryVideo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.2; filter: blur(5px);" loop muted playsinline>
+        <source src="nadine_aamri_14030402_203317394.mp4" type="video/mp4">
+    </video>
+
+    <h1>🎓 Mabrouk ya Nadine ❤️</h1>
+    <img src="1784163896052.jpg" alt="Nadine" class="birthday-photo">
+    
+    <div class="message-box">
+        <p>
+            Nadine alf mabrouk enjahek fel bac w wallahi lezem ta3rfi eli frahtlek mel 9alb khater n3ref eli t3ebti w 7titi mghoud kbir bech tawsli lel moment hedhi w lyoum el far7a hethi kolha tistaheliha 3al lekher khatrek tbarkallah 3lik 9wiya w dima tas3a bech t7a9a9 elli f belek rabi ykhalik dima hakka ya rabbi w ynawar tri9ek w inshallah hadhi tkoun kan el bideya mta3 naja7atek lkbira lkol fi 7yatek khater tistaheli t3ich kol chay ma7leh w tefrah w nchallah dima nej7a w rabi ywafe9ek fi li jey lkol w mazel el khir 9odemk barcha yestana fik.
+        </p>
+        <span class="signature">Alf Mabrouk! ❤️</span>
+    </div>
+</div>
+
+<script>
+function createConfetti() {
+    for(let i=0; i<50; i++) {
+        let c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.animationDuration = (Math.random()*3+2) + 's';
+        document.body.appendChild(c);
+    }
+}
+
+const startBtn = document.getElementById('startBtn');
+const mainSong = document.getElementById('mainSong');
+const chrono = document.getElementById('chrono');
+const introBox = document.getElementById('introBox');
+const birthdayCard = document.getElementById('birthdayCard');
+const memoryVideo = document.getElementById('memoryVideo');
+let timeLeft = 10;
+
+startBtn.addEventListener('click', () => {
+    startBtn.style.display = 'none';
+    chrono.style.display = 'block';
+    
+    createConfetti();
+
+    const timer = setInterval(() => {
+        timeLeft--;
+        chrono.innerText = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            mainSong.play();
+            memoryVideo.play();
+            introBox.style.display = 'none';
+            birthdayCard.style.display = 'block';
+        }
+    }, 1000);
+});
+</script>
+</body>
+</html>
